@@ -1,0 +1,13 @@
+.container {
+    padding-top: 80px;
+}
+
+.row {
+    font-size: 10rem;
+    text-align: center;
+}
+
+.square:hover {
+    cursor: pointer;
+}
+

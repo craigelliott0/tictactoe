@@ -1,17 +1,20 @@
-# from flask import Flask, render_template
-#
-# app = Flask(__name__)
-#
-#
-# @app.route("/")
-# def home():
-#     return render_template('index.html')
+from flask import Flask, render_template
+from flask_bootstrap import Bootstrap
+
+app = Flask(__name__)
+Bootstrap(app)
 
 
 row1 = ['1', '2', '3']
 row2 = ['4', '5', '6']
 row3 = ['7', '8', '9']
 print(f"{row1}\n{row2}\n{row3}")
+
+
+@app.route("/")
+def home():
+    return render_template('index.html', row1=row1, row2=row2, row3=row3)
+
 
 winning_combos = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
 chosen_numbers = []
@@ -38,9 +41,36 @@ def check_for_win(player_nums):
                 print("Player 2 wins! OOO m g!")
 
 
+# Game loop #
+# Takes players' inputs and executes the above functions until a win is detected #
+def run_game():
+    while not game_over:
+        # player_move('player1')
+        player_is_choosing = True
+        while player_is_choosing:
+            p1_move = int(input("Player 1, pick a number: "))
+            current_player = 'Player 1'
+            if not is_chosen(p1_move):
+                player_is_choosing = False
+                add_to_board(p1_move, current_player)
+                check_for_win(p1_nums)
+
+        if not game_over:
+            # player_move('player2')
+            player_is_choosing = True
+            while player_is_choosing:
+                p2_move = int(input("Player 2, pick a number: "))
+                current_player = 'Player 2'
+                if not is_chosen(p2_move):
+                    player_is_choosing = False
+                    add_to_board(p2_move, current_player)
+                    check_for_win(p2_nums)
+
+
 # This function applies the player's symbol to the chosen spot on the board #
-def add_to_board(player_move):
-    if player_move == p1_move:
+def add_to_board(player_move, current_player):
+    # if player_move == p1_move:
+    if current_player == 'Player 1':
         p1_nums.append(player_move)
         symbol = 'X'
     else:
@@ -83,28 +113,7 @@ def is_chosen(player_move):
 #             check_for_win(p_nums)
 
 
-# Game loop #
-# Takes players' inputs and executes the above functions until a win is detected #
-while not game_over:
-    # player_move('player1')
-    player_is_choosing = True
-    while player_is_choosing:
-        p1_move = int(input("Player 1, pick a number: "))
-        if not is_chosen(p1_move):
-            player_is_choosing = False
-            add_to_board(p1_move)
-            check_for_win(p1_nums)
+# run_game()
 
-    if not game_over:
-        # player_move('player2')
-        player_is_choosing = True
-        while player_is_choosing:
-            p2_move = int(input("Player 2, pick a number: "))
-            if not is_chosen(p2_move):
-                player_is_choosing = False
-                add_to_board(p2_move)
-                check_for_win(p2_nums)
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
-
+if __name__ == "__main__":
+    app.run(debug=True)

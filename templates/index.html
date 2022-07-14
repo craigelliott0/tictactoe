@@ -1,11 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>TicTacToe</title>
-</head>
-<body>
-  <h1>TicTacToeLet'sGo</h1>
+{% extends "bootstrap/base.html" %}
+{% block title %}This is an example page{% endblock %}
 
-</body>
-</html>
+{% block styles %}
+{{super()}}
+<link rel="stylesheet"
+      href="{{url_for('.static', filename='styles.css')}}">
+{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+    <h1>Hello, Bootstrap</h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 square">{{ row1[0] }}</div>
+            <div class="col-lg-4 square">{{ row1[1] }}</div>
+            <div class="col-lg-4 square">{{ row1[2] }}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 square">{{ row2[0] }}</div>
+            <div class="col-lg-4 square">{{ row2[1] }}</div>
+            <div class="col-lg-4 square">{{ row2[2] }}</div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 square">{{ row3[0] }}</div>
+            <div class="col-lg-4 square">{{ row3[1] }}</div>
+            <div class="col-lg-4 square">{{ row3[2] }}</div>
+        </div>
+    </div>
+{% endblock %}
