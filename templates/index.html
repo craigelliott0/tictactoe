@@ -14,22 +14,30 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Hello, Bootstrap</h1>
+    <h1>Tic Tac Toe</h1>
+    <h2 id="game-status">{{ status }}</h2>
+    <h3 id="x-score">Xs: {{ p1_score }}</h3>
+    <h3 id="o-score">Os: {{ p2_score }}</h3>
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 square">{{ row1[0] }}</div>
-            <div class="col-lg-4 square">{{ row1[1] }}</div>
-            <div class="col-lg-4 square">{{ row1[2] }}</div>
+            <div class="col-lg-4 square"><a href="/?turn=1" name="1">{{ row1[0] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=2" name="2">{{ row1[1] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=3" name="3">{{ row1[2] }}</a></div>
         </div>
         <div class="row">
-            <div class="col-lg-4 square">{{ row2[0] }}</div>
-            <div class="col-lg-4 square">{{ row2[1] }}</div>
-            <div class="col-lg-4 square">{{ row2[2] }}</div>
+            <div class="col-lg-4 square"><a href="/?turn=4" name="4">{{ row2[0] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=5" name="5">{{ row2[1] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=6" name="6">{{ row2[2] }}</a></div>
         </div>
         <div class="row">
-            <div class="col-lg-4 square">{{ row3[0] }}</div>
-            <div class="col-lg-4 square">{{ row3[1] }}</div>
-            <div class="col-lg-4 square">{{ row3[2] }}</div>
+            <div class="col-lg-4 square"><a href="/?turn=7" name="7">{{ row3[0] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=8" name="8">{{ row3[1] }}</a></div>
+            <div class="col-lg-4 square"><a href="/?turn=9" name="9">{{ row3[2] }}</a></div>
         </div>
     </div>
+<!--    <a href="/start/"><input type="button" value="Start"></a>-->
+    <form action="{{ url_for('home') }}" method="POST">
+<!--        <input type="button" id="start-btn" name="start_button" value="Start!">-->
+        <button type="submit">Start!!</button>
+    </form>
 {% endblock %}
