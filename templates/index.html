@@ -5,6 +5,10 @@
 {{super()}}
 <link rel="stylesheet"
       href="{{url_for('.static', filename='styles.css')}}">
+<!--google fonts-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Russo+One&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block navbar %}
@@ -14,30 +18,35 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Tic Tac Toe</h1>
+    <h1>TIC/TAC/TOE</h1>
+    <h3 id="x-score">Xs:<br><span class="score_text">{{ p1_score }}</span></h3>
     <h2 id="game-status">{{ status }}</h2>
-    <h3 id="x-score">Xs: {{ p1_score }}</h3>
-    <h3 id="o-score">Os: {{ p2_score }}</h3>
+    <h3 id="o-score">Os:<br><span class="score_text">{{ p2_score }}</span></h3>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4 square"><a href="/?turn=1" name="1">{{ row1[0] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=2" name="2">{{ row1[1] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=3" name="3">{{ row1[2] }}</a></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 square"><a href="/?turn=4" name="4">{{ row2[0] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=5" name="5">{{ row2[1] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=6" name="6">{{ row2[2] }}</a></div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 square"><a href="/?turn=7" name="7">{{ row3[0] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=8" name="8">{{ row3[1] }}</a></div>
-            <div class="col-lg-4 square"><a href="/?turn=9" name="9">{{ row3[2] }}</a></div>
-        </div>
+        {% for row_num in range(0, 7, 3) %}
+            <div class="row">
+                {% for num in range(1, 4) %}
+                    {% set new_num = num + row_num %}
+                    <div class="col-lg-4 square" id="sq-{{ new_num }}">
+                        {% if all_squares[(num - 1) + row_num] != 'X' and all_squares[(num - 1) + row_num] != 'O'%}
+                            <a href="/?turn={{ new_num }}" class="blank_sq" name="{{ new_num }}">
+                                {{ all_squares[(num - 1) + row_num] }}</a>
+                        {% elif winning_combo|length == 3 and new_num in winning_combo %}
+                            <a href="/?turn={{ new_num }}" class="winning_num" name="{{ new_num }}">
+                                {{ all_squares[(num - 1) + row_num] }}</a>
+                        {% else %}
+                            <a href="/?turn={{ new_num }}" name="{{ new_num }}">
+                                {{ all_squares[(num - 1) + row_num] }}</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+
     </div>
 <!--    <a href="/start/"><input type="button" value="Start"></a>-->
     <form action="{{ url_for('home') }}" method="POST">
 <!--        <input type="button" id="start-btn" name="start_button" value="Start!">-->
-        <button type="submit">Start!!</button>
+        <button type="submit" class="btn btn-outline-dark">New Game</button>
     </form>
 {% endblock %}

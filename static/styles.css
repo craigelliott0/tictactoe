@@ -1,26 +1,55 @@
+body {
+    background-image: url("/static/bg_image.png");
+    background-size: cover;
+    color: white;
+    font-family: 'Russo One', sans-serif;
+}
+
+img {
+    width: 100%;
+}
+
 h1, h2 {
     text-align: center;
 }
 
-h3  {
+h1 {
+    font-style: italic;
+    position: relative;
+    top: 20px;
+    font-size: 7rem;
+}
+
+h2  {
     width: 50%;
-    background: red;
     display: inline-block;
+    position: relative;
+    bottom: 50px;
+}
+
+h3  {
+    width: 25%;
+    display: inline-block;
+    font-size: 3rem;
 }
 
 #x-score {
-    background: green;
+    padding-left: 80px;
 }
 
 #o-score {
     position: absolute;
     align-right: 0;
     text-align: right;
+    padding-right: 80px;
+}
+
+.score_text {
+    font-size: 6rem;
 }
 
 .container {
-    padding-top: 80px;
-    background-color: blue;
+    padding-top: 10px;
 }
 
 .row {
@@ -33,12 +62,71 @@ h3  {
 }
 
 a {
+    color: white;
+}
+
+.blank_sq {
+    color: transparent;
+}
+
+.blank_sq:hover {
+    color: transparent;
+}
+
+.winning_num {
+    color: black;
+}
+
+.winning_num:hover {
     color: black;
 }
 
 a:hover {
-    color: black;
+    color: white;
     text-decoration: none;
     cursor: pointer;
 }
 
+#sq-1 {
+    border-right: 5px solid white;
+    border-bottom: 5px solid white;
+}
+
+#sq-2 {
+    border-bottom: 5px solid white;
+}
+
+#sq-3 {
+    border-left: 5px solid white;
+    border-bottom: 5px solid white;
+}
+
+#sq-4 {
+    border-right: 5px solid white;
+    border-bottom: 5px solid white;
+}
+
+#sq-5 {
+    border-bottom: 5px solid white;
+}
+
+#sq-6 {
+    border-left: 5px solid white;
+    border-bottom: 5px solid white;
+}
+
+#sq-7 {
+    border-right: 5px solid white;
+}
+
+#sq-9 {
+    border-left: 5px solid white;
+}
+
+form {
+    text-align: center;
+}
+
+button {
+    background: transparent;
+}
