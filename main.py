@@ -25,7 +25,6 @@ def start():
     winning_combo = []
 
 
-
 game_status = "Test"
 
 
@@ -50,20 +49,11 @@ def home():
     if len(winning_combo) == 3:
         print(winning_combo)
     return render_template('index.html',
-                           # row1=board.row1,
-                           # row2=board.row2,
-                           # row3=board.row3,
                            status=game_status,
                            p1_score=p1_score,
                            p2_score=p2_score,
                            all_squares=all_squares,
                            winning_combo=winning_combo)
-
-
-# winning_combos = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]]
-# chosen_numbers = []
-# p1_nums = []
-# p2_nums = []
 
 
 # This function checks the board for a win #
@@ -81,10 +71,8 @@ def check_for_win(player_nums):
             winning_combo = combo
             print(winning_combo)
             if player_nums == board.p1_nums:
-                # print("Player 1 wins! Xs 4 lyf")
                 status('p1win')
             else:
-                # print("Player 2 wins! OOO m g!")
                 status('p2win')
 
 
@@ -118,32 +106,6 @@ def run_game(chosen_square):
         status('game_over')
 
 
-# Game loop #
-# Takes players' inputs and executes the above functions until a win is detected #
-# def run_game_console_version():
-#     while not game_over:
-#         # player_move('player1')
-#         player_is_choosing = True
-#         while player_is_choosing:
-#             p1_move = int(input("Player 1, pick a number: "))
-#             current_player = 'Player 1'
-#             if not is_chosen(p1_move):
-#                 player_is_choosing = False
-#                 add_to_board(p1_move, current_player)
-#                 check_for_win(p1_nums)
-#
-#         if not game_over:
-#             # player_move('player2')
-#             player_is_choosing = True
-#             while player_is_choosing:
-#                 p2_move = int(input("Player 2, pick a number: "))
-#                 current_player = 'Player 2'
-#                 if not is_chosen(p2_move):
-#                     player_is_choosing = False
-#                     add_to_board(p2_move, current_player)
-#                     check_for_win(p2_nums)
-
-
 # This function applies the player's symbol to the chosen spot on the board #
 def add_to_board(player_move, current_player):
     if current_player == 'P1':
@@ -158,13 +120,11 @@ def add_to_board(player_move, current_player):
         board.row2[player_move - 4] = symbol
     else:
         board.row3[player_move - 7] = symbol
-    # print(f"{board.row1}\n{board.row2}\n{board.row3}")
 
 
-# Checks if the chosen number has already been selected #
+# Checks if the chosen square has already been selected #
 def is_chosen(player_move):
     if player_move in board.chosen_numbers:
-        # print("You wish. Already taken. Pick again bey.")
         status('pick_again')
         return True
     else:
